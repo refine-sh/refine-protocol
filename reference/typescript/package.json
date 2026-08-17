@@ -1,0 +1,13 @@
+{
+  "name": "refine-protocol-reference",
+  "private": true,
+  "version": "1.0.0-rc.1",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "check": "node --check transport-session.ts && node --check cli.ts",
+    "test": "python3 -m unittest discover -s ../../tests -v"
+  }
+}
