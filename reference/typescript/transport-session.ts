@@ -201,7 +201,7 @@ function validateSnapshot(value: unknown, context: string): void {
     sourceIds.push(visibleIdentifier(required(source, "sourceId", sourceContext), `${sourceContext}.sourceId`));
     const text = string(required(source, "text", sourceContext), `${sourceContext}.text`);
     if (Buffer.byteLength(text, "utf8") > MAX_SOURCE_BYTES) throw new ProtocolError(`${sourceContext}.text exceeds maxSourceBytes`);
-    enumeration(required(source, "sourceSyntax", sourceContext), ["plainText", "markdownDocument", "latexDocument"], `${sourceContext}.sourceSyntax`);
+    enumeration(required(source, "sourceSyntax", sourceContext), ["plainText", "markdownDocument", "markdownDocumentHardLineBreaks", "latexDocument"], `${sourceContext}.sourceSyntax`);
   });
   if (new Set(sourceIds).size !== sourceIds.length) throw new ProtocolError(`${context}.sources contains a duplicate sourceId`);
 }

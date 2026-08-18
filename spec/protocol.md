@@ -272,14 +272,37 @@ A run has at most one open document. Legal client commands are:
 - `closeDocument`: closes document state.
 
 Snapshots contain one or two unique sources with syntax `plainText`,
-`markdownDocument`, or `latexDocument`. The complete source is authoritative.
-Attention MAY reorder work that has not started but MUST NOT narrow check
-coverage. `visibleRanges` is either empty or contains nonempty ranges in
-ascending source-location order without overlap; touching ranges are allowed.
-Selection coordinates address the full source, and a check selection MUST be
-nonempty. A check intent MAY contain a nonempty `sourceIds` set or one
-`selection`, but MUST NOT contain both. Omitting both scopes the check to the
-complete snapshot. `forcedLanguageTag` is independent of that scope.
+`markdownDocument`, `markdownDocumentHardLineBreaks`, or `latexDocument`. The
+complete source is authoritative. Attention MAY reorder work that has not
+started but MUST NOT narrow check coverage. `visibleRanges` is either empty or
+contains nonempty ranges in ascending source-location order without overlap;
+touching ranges are allowed. Selection coordinates address the full source, and
+a check selection MUST be nonempty. A check intent MAY contain a nonempty
+`sourceIds` set or one `selection`, but MUST NOT contain both. Omitting both
+scopes the check to the complete snapshot. `forcedLanguageTag` is independent of
+that scope.
+
+A line ending is exactly U+000A, U+000D, or the U+000D U+000A pair. Every other
+Unicode line or paragraph separator is an ordinary character under every source
+syntax. Under `markdownDocument` and `latexDocument` the server MAY reflow
+source line endings it has proven insignificant, so corrected text need not
+preserve the original line layout.
+
+`markdownDocumentHardLineBreaks` protects Markdown syntax exactly as
+`markdownDocument` does, and parser-proven soft line endings remain logical
+whitespace for checking, so prose wrapped across two source lines is still
+checked as one logical paragraph. Its line endings are immovable: the server's
+projection and Apply-plan materialization MUST reproduce every line ending at
+the same source position, and MUST NOT remove one, introduce one, or place an
+edit across one. A correction the server cannot materialize under that rule is
+not published as a suggestion. The declaration is host-authoritative and per
+source, and changing it changes the source revision even when the text is
+unchanged.
+
+Protocol 1.0 carries no feature discovery, so a client cannot ask whether a
+server implements a declared syntax. A syntax the peer does not implement is an
+unknown enum value, which is rejected at decode as a fatal `malformedMessage`
+rather than degraded silently.
 
 The server emits `documentAccepted` for an accepted revision or
 `resyncRequired` with `documentNotOpen`, `conflictingRevision`,

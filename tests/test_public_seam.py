@@ -21,6 +21,7 @@ SOCKET_SCENARIOS = (
     "reconnect-lost-state",
     "sequence-exhaustion",
     "invalid-server-inputs",
+    "markdown-hard-line-breaks",
 )
 
 

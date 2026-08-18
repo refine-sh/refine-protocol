@@ -93,6 +93,7 @@ The socket-runnable scenarios are:
 | `reconnect-lost-state` | Lost-run snapshot/attention/check restoration without receipt replay |
 | `sequence-exhaustion` | Send `UInt32.max`, close, reconnect, restart at one |
 | `invalid-server-inputs` | Reject duplicate-key and zero-length frames and close |
+| `markdown-hard-line-breaks` | Hard-line-break Markdown snapshot, check, Apply, receipt preserving every line ending |
 
 The fake peer compares messages with the vector and fails on the first mismatch.
 It never prints the launch token or source payloads. It is test tooling, not a
