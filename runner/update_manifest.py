@@ -83,7 +83,7 @@ def main() -> None:
     }
     manifest = {
         "formatVersion": 1,
-        "releaseCandidate": "1.0.0-rc.2",
+        "releaseCandidate": "1.0.0-rc.3",
         "protocol": {"major": 1, "minor": 0},
         "artifactDigest": aggregate.hexdigest(),
         "baseArtifactDigest": base_aggregate.hexdigest(),

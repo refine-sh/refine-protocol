@@ -24,7 +24,7 @@ client and Refine versions, exact local and remote protocol versions, macOS
 version, and a minimal reproduction. Never include launch tokens, full source
 text, provider credentials, or user documents in a public report.
 
-The public interoperability issue tracker is the repository issue tracker. It
-will become an official support surface only when this release-candidate
-repository is intentionally published; no publication is implied by this local
-bootstrap.
+The public interoperability issue tracker is the repository issue tracker. The
+repository is published as a release candidate; the tracker becomes an official
+support surface when `v1.0.0` is tagged. Until then, release candidates may be
+respun in place and carry no support obligation.
